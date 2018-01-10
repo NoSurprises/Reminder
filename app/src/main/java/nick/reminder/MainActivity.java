@@ -1,10 +1,9 @@
 package nick.reminder;
 
-import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import butterknife.BindView;
@@ -14,6 +13,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     @BindView(R.id.toolbar) Toolbar toolBar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppDefault);
