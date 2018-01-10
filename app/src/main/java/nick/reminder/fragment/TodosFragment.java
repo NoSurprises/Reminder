@@ -9,9 +9,16 @@ import nick.reminder.R;
 
 public class TodosFragment extends BaseTabFragment {
     protected final int titleResource = R.string.tab_todos;
+    private final int fragmentLayout = R.layout.fragment_todos;
+
 
     @Override
-    public String getTitle() {
-        return mainContext.getString(titleResource);
+    public int getTitleResource() {
+        return titleResource;
+    }
+
+    @Override
+    public int getFragmentLayout() {
+        return fragmentLayout;
     }
 }

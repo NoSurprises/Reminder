@@ -9,10 +9,17 @@ import nick.reminder.R;
 
 public class IdeasFragment extends BaseTabFragment {
     protected final int titleResource = R.string.tab_ideas;
+    private final int fragmentLayout = R.layout.fragment_ideas;
+
 
     @Override
-    public String getTitle() {
-        return mainContext.getString(titleResource);
+    public int getTitleResource() {
+        return titleResource;
+    }
+
+    @Override
+    public int getFragmentLayout() {
+        return fragmentLayout;
     }
 }
 

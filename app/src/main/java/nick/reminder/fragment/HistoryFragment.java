@@ -10,10 +10,16 @@ import nick.reminder.R;
 public class HistoryFragment extends BaseTabFragment {
 
     protected final int titleResource = R.string.tab_history;
+    private final int fragmentLayout = R.layout.fragment_history;
+
 
     @Override
-    public String getTitle() {
-        return mainContext.getString(titleResource);
+    public int getTitleResource() {
+        return titleResource;
     }
 
+    @Override
+    public int getFragmentLayout() {
+        return fragmentLayout;
+    }
 }
