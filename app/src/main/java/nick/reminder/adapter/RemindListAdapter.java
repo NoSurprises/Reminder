@@ -1,5 +1,6 @@
 package nick.reminder.adapter;
 
+import android.database.Cursor;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,12 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import nick.reminder.R;
-import nick.reminder.dto.RemindDTO;
+import nick.reminder.database.ReminderDataModel;
 
 /**
  * Created by Nick on 1/10/2018.
@@ -20,10 +19,18 @@ import nick.reminder.dto.RemindDTO;
 
 public class RemindListAdapter extends RecyclerView.Adapter<RemindListAdapter.RemindViewHolder> {
 
-    private List<RemindDTO> data;
+    private Cursor data;
 
-    public RemindListAdapter(List<RemindDTO> data) {
+    public RemindListAdapter(Cursor data) {
         this.data = data;
+    }
+
+    public void swapCursor(Cursor data) {
+        if (this.data != null) {
+            this.data.close();
+        }
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -35,12 +42,22 @@ public class RemindListAdapter extends RecyclerView.Adapter<RemindListAdapter.Re
 
     @Override
     public void onBindViewHolder(RemindViewHolder holder, int position) {
-        holder.title.setText(data.get(position).getTitle());
+        String title = data.getString(data.getColumnIndex(ReminderDataModel.TITLE));
+        holder.title.setText(title);
+        // TODO: 1/11/2018 bind description
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data.getCount();
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        if (data != null && !data.isClosed()) {
+            data.close();
+        }
     }
 
     public static class RemindViewHolder extends RecyclerView.ViewHolder {
